@@ -10,5 +10,6 @@ lib/B/ppport.h
 t/00_compile.t
 t/01_simple.t
 t/02_entersub.t
+t/03_padsv.t
 META.yml
 MANIFEST

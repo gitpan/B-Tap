@@ -4,8 +4,10 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.6.5",
-   "license" : "perl_5",
+   "generated_by" : "Minilla/v0.7.5",
+   "license" : [
+      "perl_5"
+   ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
@@ -19,7 +21,8 @@
          "share",
          "eg",
          "examples",
-         "author"
+         "author",
+         "builder"
       ]
    },
    "prereqs" : {
@@ -46,6 +49,8 @@
       },
       "test" : {
          "requires" : {
+            "B" : "0",
+            "B::Deparse" : "0",
             "B::Tools" : "0",
             "Test::More" : "0.98"
          }
@@ -54,7 +59,7 @@
    "provides" : {
       "B::Tap" : {
          "file" : "lib/B/Tap.pm",
-         "version" : "0.05"
+         "version" : "0.06"
       }
    },
    "release_status" : "stable",
@@ -68,5 +73,5 @@
          "web" : "https://github.com/tokuhirom/B-Tap"
       }
    },
-   "version" : "0.05"
+   "version" : "0.06"
 }

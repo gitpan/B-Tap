@@ -3,6 +3,8 @@ abstract: 'Inject tapping node to optree'
 author:
   - 'tokuhirom <tokuhirom@gmail.com>'
 build_requires:
+  B: 0
+  B::Deparse: 0
   B::Tools: 0
   Test::More: 0.98
 configure_requires:
@@ -10,7 +12,7 @@ configure_requires:
   CPAN::Meta::Prereqs: 0
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Minilla/v0.6.5, CPAN::Meta::Converter version 2.132510'
+generated_by: 'Minilla/v0.7.5, CPAN::Meta::Converter version 2.132510'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -25,10 +27,11 @@ no_index:
     - eg
     - examples
     - author
+    - builder
 provides:
   B::Tap:
     file: lib/B/Tap.pm
-    version: 0.05
+    version: 0.06
 requires:
   parent: 0
   perl: 5.014000
@@ -36,4 +39,4 @@ resources:
   bugtracker: https://github.com/tokuhirom/B-Tap/issues
   homepage: https://github.com/tokuhirom/B-Tap
   repository: git://github.com/tokuhirom/B-Tap.git
-version: 0.05
+version: 0.06
