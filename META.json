@@ -59,7 +59,7 @@
    "provides" : {
       "B::Tap" : {
          "file" : "lib/B/Tap.pm",
-         "version" : "0.07"
+         "version" : "0.08"
       }
    },
    "release_status" : "stable",
@@ -73,5 +73,5 @@
          "web" : "https://github.com/tokuhirom/B-Tap"
       }
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }
