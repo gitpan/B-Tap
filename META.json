@@ -60,11 +60,11 @@
    "provides" : {
       "B::Tap" : {
          "file" : "lib/B/Tap.pm",
-         "version" : "0.09"
+         "version" : "0.10"
       },
-      "Devel::CallTrace" : {
-         "file" : "lib/Devel/CallTrace.pm",
-         "version" : "0.09"
+      "Devel::CodeObserver" : {
+         "file" : "lib/Devel/CodeObserver.pm",
+         "version" : "0.10"
       }
    },
    "release_status" : "stable",
@@ -78,5 +78,5 @@
          "web" : "https://github.com/tokuhirom/B-Tap"
       }
    },
-   "version" : "0.09"
+   "version" : "0.10"
 }

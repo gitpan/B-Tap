@@ -28,10 +28,10 @@ no_index:
 provides:
   B::Tap:
     file: lib/B/Tap.pm
-    version: 0.09
-  Devel::CallTrace:
-    file: lib/Devel/CallTrace.pm
-    version: 0.09
+    version: 0.10
+  Devel::CodeObserver:
+    file: lib/Devel/CodeObserver.pm
+    version: 0.10
 requires:
   B: 0
   B::Deparse: 0
@@ -43,4 +43,4 @@ resources:
   bugtracker: https://github.com/tokuhirom/B-Tap/issues
   homepage: https://github.com/tokuhirom/B-Tap
   repository: git://github.com/tokuhirom/B-Tap.git
-version: 0.09
+version: 0.10
