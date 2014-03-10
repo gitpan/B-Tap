@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.8.3",
+   "generated_by" : "Minilla/v0.11.1",
    "license" : [
       "perl_5"
    ],
@@ -43,15 +43,16 @@
       },
       "runtime" : {
          "requires" : {
+            "B" : "0",
+            "B::Deparse" : "0",
+            "B::Tools" : "0",
+            "Try::Tiny" : "0",
             "parent" : "0",
             "perl" : "5.014000"
          }
       },
       "test" : {
          "requires" : {
-            "B" : "0",
-            "B::Deparse" : "0",
-            "B::Tools" : "0",
             "Test::More" : "0.98"
          }
       }
@@ -59,7 +60,11 @@
    "provides" : {
       "B::Tap" : {
          "file" : "lib/B/Tap.pm",
-         "version" : "0.08"
+         "version" : "0.09"
+      },
+      "Devel::CallTrace" : {
+         "file" : "lib/Devel/CallTrace.pm",
+         "version" : "0.09"
       }
    },
    "release_status" : "stable",
@@ -73,5 +78,5 @@
          "web" : "https://github.com/tokuhirom/B-Tap"
       }
    },
-   "version" : "0.08"
+   "version" : "0.09"
 }

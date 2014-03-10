@@ -4,12 +4,17 @@ LICENSE
 META.json
 README.md
 cpanfile
+eg/simple.pl
 lib/B/Tap.pm
 lib/B/Tap.xs
 lib/B/ppport.h
+lib/Devel/CallTrace.pm
 t/00_compile.t
 t/01_simple.t
 t/02_entersub.t
 t/03_padsv.t
+t/05_regexp.t
+t/06_not_defined.t
+t/CallTrace/01_simple.t
 META.yml
 MANIFEST

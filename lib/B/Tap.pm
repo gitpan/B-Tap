@@ -3,7 +3,7 @@ use 5.014000;
 use strict;
 use warnings;
 
-our $VERSION = "0.08";
+our $VERSION = "0.09";
 
 use parent qw(Exporter);
 
@@ -48,7 +48,9 @@ B::Tap - Inject tapping node to optree
 
 =head1 SYNOPSIS
 
+    use B;
     use B::Tap;
+    use B::Tools;
 
     sub foo { 63 }
 
