@@ -4,7 +4,7 @@ use warnings;
 use utf8;
 use 5.010_001;
 
-our $VERSION = "0.10";
+our $VERSION = "0.11";
 
 our @WARNINGS;
 
@@ -13,7 +13,6 @@ use B::Tap qw(tap);
 use B::Tools qw(op_walk);
 use B::Deparse;
 use Data::Dumper ();
-use Try::Tiny;
 
 sub new {
     my $class = shift;
@@ -54,12 +53,37 @@ sub call {
 
     return (
         $retval,
-        dump_pairs($code, [grep { @$_ > 1 } @tap_results]),
+        Devel::CallTrace::Result->new(
+            code => $code,
+            tap_results => [grep { @$_ > 1 } @tap_results],
+        )
     );
 }
 
+sub need_hook {
+    my $op = shift;
+    return 1 if $op->name eq 'entersub';
+    return 1 if $op->name eq 'padsv';
+    return 1 if $op->name eq 'aelem';
+    return 1 if $op->name eq 'helem';
+    return 1 if $op->name eq 'null' && ppname($op->targ) eq 'pp_rv2sv';
+    return 0;
+}
+
+package Devel::CallTrace::Result;
+
+use Try::Tiny;
+
+sub new {
+    my $class = shift;
+    my %args = @_==1 ? %{$_[0]} : @_;
+    bless {%args}, $class;
+}
+
 sub dump_pairs {
-    my ($code, $tap_results) = @_;
+    my ($self) = @_;
+    my $tap_results = $self->{tap_results};
+    my $code = $self->{code};
 
     my @pairs;
     local $Data::Dumper::Terse = 1;
@@ -74,8 +98,10 @@ sub dump_pairs {
 
                 my $deparse = B::Deparse->new();
                 $deparse->{curcv} = B::svref_2object($code);
-                push @pairs, $deparse->deparse($op);
-                push @pairs, Data::Dumper::Dumper($value->[1]);
+                push @pairs, [
+                    $deparse->deparse($op),
+                    Data::Dumper::Dumper($value->[1])
+                ];
             } catch {
                 warn "[Test::Power] [BUG]: $_";
                 push @WARNINGS, "[Test::Power] [BUG]: $_";
@@ -84,17 +110,6 @@ sub dump_pairs {
     }
     return \@pairs;
 }
-
-sub need_hook {
-    my $op = shift;
-    return 1 if $op->name eq 'entersub';
-    return 1 if $op->name eq 'padsv';
-    return 1 if $op->name eq 'aelem';
-    return 1 if $op->name eq 'helem';
-    return 1 if $op->name eq 'null' && ppname($op->targ) eq 'pp_rv2sv';
-    return 0;
-}
-
 
 1;
 __END__
@@ -120,9 +135,20 @@ This module call the CodeRef, and fetch the Perl5 VM's temporary values.
 
 Create new instance.
 
-=item C<< $tracer->call($code: CodeRef) : (Scalar, ArrayRef) >>
+=item C<< $tracer->call($code: CodeRef) : (Scalar, Devel::CodeObserver::Result) >>
 
 Call the C<$code> and get the tracing result.
+
+=back
+
+=head1 Devel::CodeObserver::Result's METHODS
+
+=over 4
+
+=item C<< $result->dump_pairs() : ArrayRef[ArrayRef[Str]] >>
+
+Returns the pair of the dump result. Return value's each element contains ArrayRef.
+Each element contains 2 values. First is the B::Deparse'd code. Second is the Dumper()'ed value.
 
 =back
 
@@ -148,9 +174,10 @@ Here is the concrete example.
     };
 
     my $tracer = Devel::CodeObserver->new();
-    my ($retval, $traced) = $tracer->call(sub { $dat->{z}->{m}[0]{n} eq 4 ? 1 : 0 });
+    my ($retval, $result) = $tracer->call(sub { $dat->{z}->{m}[0]{n} eq 4 ? 1 : 0 });
     print "RETVAL: $retval\n";
-    while (my ($code, $val) = splice @$traced, 0, 2) {
+    for my $pair (@{$result->dump_pairs}) {
+        my ($code, $val) = @$pair;
         print "$code => $val\n";
     }
 
