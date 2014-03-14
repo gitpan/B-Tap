@@ -4,14 +4,13 @@ use warnings;
 use utf8;
 use 5.010_001;
 
-our $VERSION = "0.11";
+our $VERSION = "0.12";
 
 our @WARNINGS;
 
 use B qw(class ppname);
 use B::Tap qw(tap);
 use B::Tools qw(op_walk);
-use B::Deparse;
 use Data::Dumper ();
 
 sub new {
@@ -84,6 +83,13 @@ sub dump_pairs {
     my ($self) = @_;
     my $tap_results = $self->{tap_results};
     my $code = $self->{code};
+
+    # We should load B::Deparse lazily. Because loading B::Deparse is really slow.
+    # It's really big module.
+    #
+    # And so, this module is mainly used for testing. And this part is only required if
+    # the test case was failed. I make faster the passed test case.
+    require B::Deparse;
 
     my @pairs;
     local $Data::Dumper::Terse = 1;
