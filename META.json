@@ -4,7 +4,7 @@
       "tokuhirom <tokuhirom@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.12.0",
+   "generated_by" : "Minilla/v2.1.1",
    "license" : [
       "perl_5"
    ],
@@ -28,15 +28,14 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "CPAN::Meta" : "0",
-            "CPAN::Meta::Prereqs" : "0",
             "Module::Build" : "0.38"
          }
       },
       "develop" : {
          "requires" : {
             "Test::CPAN::Meta" : "0",
-            "Test::MinimumVersion" : "0.10108",
+            "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.04",
             "Test::Pod" : "1.41",
             "Test::Spellunker" : "v0.2.7"
          }
@@ -60,14 +59,14 @@
    "provides" : {
       "B::Tap" : {
          "file" : "lib/B/Tap.pm",
-         "version" : "0.13"
+         "version" : "0.14"
       },
       "Devel::CallTrace::Result" : {
          "file" : "lib/Devel/CodeObserver.pm"
       },
       "Devel::CodeObserver" : {
          "file" : "lib/Devel/CodeObserver.pm",
-         "version" : "0.13"
+         "version" : "0.14"
       }
    },
    "release_status" : "stable",
@@ -81,5 +80,8 @@
          "web" : "https://github.com/tokuhirom/B-Tap"
       }
    },
-   "version" : "0.13"
+   "version" : "0.14",
+   "x_contributors" : [
+      "Brian Fraser <fraserbn@gmail.com>"
+   ]
 }
